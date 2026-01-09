@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Ujian Terbuka - dr. Supriyanto Dharmoredjo</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f4f8;
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', serif;
+        }
+        .unair-blue {
+            color: #002060;
+        }
+        .bg-unair-blue {
+            background-color: #002060;
+        }
+        .unair-yellow {
+            color: #FFCC00;
+        }
+        .bg-unair-yellow {
+            background-color: #FFCC00;
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        .ornament {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23002060' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        /* Style untuk foto profil */
+        .profile-image-container {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            background-color: #e2e8f0;
+        }
+    </style>
+
+    <!-- Script Error Handling Ditaruh di HEAD agar terbaca sebelum gambar dimuat -->
+    <script>
+        // FUNGSI UNTUK MENANGANI ERROR LOGO
+        function handleLogoError(img) {
+            const logoId = '13PeZ1v3NYcL4Rf8h_4zzjEuKRkorXJO3'; // ID Logo Baru
+            
+            // Urutan prioritas link logo
+            const alternatives = [
+                `https://lh3.googleusercontent.com/d/${logoId}`, // Direct Link Google
+                `https://drive.google.com/uc?export=view&id=${logoId}`, // Export Link
+                'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Logo_Universitas_Airlangga.png/480px-Logo_Universitas_Airlangga.png' // Fallback Wiki
+            ];
+
+            let attempt = parseInt(img.getAttribute('data-attempt') || '0');
+
+            if (attempt < alternatives.length) {
+                attempt++;
+                img.setAttribute('data-attempt', attempt);
+                setTimeout(() => { img.src = alternatives[attempt - 1]; }, 100);
+            } else {
+                // Jika semua gagal, sembunyikan gambar dan tampilkan ikon fallback
+                img.style.display = 'none';
+                const fallback = document.getElementById('fallback-icon');
+                if (fallback) {
+                    fallback.classList.remove('hidden');
+                    fallback.style.display = 'flex';
+                }
+            }
+        }
+
+        // FUNGSI UNTUK MENANGANI ERROR FOTO PROFIL
+        function handleImageError(img) {
+            const gDriveId = '1r9CF6XFy2FVZ8lPhgsQXoaPR6i2wtuHQ'; // ID Foto Baru
+            
+            // Daftar prioritas URL untuk mencoba memuat gambar Google Drive
+            const alternatives = [
+                `https://lh3.googleusercontent.com/d/${gDriveId}`, 
+                `https://drive.google.com/uc?export=view&id=${gDriveId}`, 
+                'Pak Dirut 2.jpg', 
+                'dirut.jpg'
+            ];
+
+            let attempt = parseInt(img.getAttribute('data-attempt') || '0');
+
+            if (attempt < alternatives.length) {
+                // Coba URL berikutnya dalam daftar
+                attempt++;
+                img.setAttribute('data-attempt', attempt);
+                // Kita gunakan setTimeout sedikit agar browser tidak spam request jika gagal beruntun
+                setTimeout(() => {
+                    img.src = alternatives[attempt - 1]; 
+                }, 100);
+            } else {
+                // JIKA SEMUA GAGAL: Gunakan Placeholder Avatar Online
+                img.src = 'https://ui-avatars.com/api/?name=Supriyanto&background=002060&color=fff&size=256&font-size=0.33';
+                img.onerror = null; // Stop looping
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen flex items-center justify-center py-10 px-4">
+
+    <!-- Main Container -->
+    <div class="max-w-xl w-full bg-white rounded-2xl overflow-hidden card-shadow relative ornament">
+        
+        <!-- Top Decoration Bar -->
+        <div class="h-2 w-full bg-gradient-to-r from-blue-900 via-yellow-500 to-blue-900"></div>
+
+        <!-- Header / Institution -->
+        <div class="text-center pt-8 pb-4 px-6 border-b border-gray-100">
+            <!-- Logo Universitas Airlangga -->
+            <div class="mb-4 flex justify-center">
+                 <!-- Menggunakan Link Thumbnail Drive untuk Logo (ID Baru) -->
+                 <img src="https://drive.google.com/thumbnail?id=13PeZ1v3NYcL4Rf8h_4zzjEuKRkorXJO3&sz=w500" 
+                      id="uni-logo"
+                      alt="Logo Universitas Airlangga" 
+                      class="w-32 h-auto object-contain"
+                      onerror="handleLogoError(this)">
+                 
+                 <!-- Fallback icon (hidden by default) -->
+                 <div id="fallback-icon" class="w-20 h-20 bg-unair-blue rounded-full items-center justify-center shadow-lg border-4 border-yellow-400 hidden">
+                    <i class="fas fa-university text-white text-3xl"></i>
+                 </div>
+            </div>
+            <h2 class="text-sm font-bold tracking-widest text-gray-500 uppercase mb-1">Universitas Airlangga</h2>
+            <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Fakultas Kesehatan Masyarakat</h3>
+            
+            <h1 class="text-2xl md:text-3xl font-bold unair-blue mb-2">Ujian Terbuka</h1>
+            <p class="text-md text-gray-600 italic font-serif">Promosi Doktor Program Studi Kesehatan Masyarakat</p>
+        </div>
+
+        <!-- Candidate Section -->
+        <div class="px-6 py-8 text-center bg-slate-50 relative">
+            <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-5 pointer-events-none">
+                <i class="fas fa-quote-right text-9xl absolute -top-10 -left-10 text-blue-900"></i>
+            </div>
+
+            <!-- FOTO PROFIL -->
+            <div class="profile-image-container mb-6">
+                <!-- Menggunakan Link Thumbnail Drive untuk Foto (ID Baru) -->
+                <img src="https://drive.google.com/thumbnail?id=1r9CF6XFy2FVZ8lPhgsQXoaPR6i2wtuHQ&sz=w500" 
+                     id="candidate-photo"
+                     alt="dr. Supriyanto" 
+                     class="profile-image"
+                     onerror="handleImageError(this)">
+                
+                <!-- Badge gelar -->
+                <div class="absolute bottom-0 right-0 bg-yellow-500 text-blue-900 text-xs font-bold px-3 py-1 rounded-full shadow-md border-2 border-white">
+                    Doktor
+                </div>
+            </div>
+
+            <p class="text-sm font-semibold text-yellow-600 mb-2 uppercase tracking-wide">Promovendus</p>
+            <!-- NAMA SATU BARIS -->
+            <h2 class="text-xl md:text-2xl font-bold text-gray-800 leading-snug mb-2">
+                dr. Supriyanto, Sp.B, FINACS, M.Kes
+            </h2>
+        </div>
+
+        <!-- Dissertation Title -->
+        <div class="px-8 py-6 bg-white">
+            <div class="border-l-4 border-yellow-500 pl-4 py-2">
+                <p class="text-xs text-gray-400 uppercase font-bold mb-1">Judul Disertasi</p>
+                <h3 class="text-md md:text-lg font-serif font-bold text-blue-900 leading-relaxed">
+                    "PENGEMBANGAN MODEL MANAJEMEN RUMAH SAKIT BERBASIS KONSEP HOSPITAL WITHOUT WALLS DALAM PLATFORM PUBLIC SAFETY CENTRE"
+                </h3>
+            </div>
+        </div>
+
+        <!-- Date & Location Details -->
+        <div class="px-6 py-6 bg-blue-50">
+            <div class="grid gap-4">
+                <!-- Date -->
+                <div class="flex items-start space-x-4 bg-white p-4 rounded-xl shadow-sm border border-blue-100">
+                    <div class="bg-blue-100 p-3 rounded-full text-blue-800">
+                        <i class="far fa-calendar-alt text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase font-bold">Hari & Tanggal</p>
+                        <p class="text-lg font-bold text-gray-800">Jumat, 23 Januari 2026</p>
+                    </div>
+                </div>
+
+                <!-- Time -->
+                <div class="flex items-start space-x-4 bg-white p-4 rounded-xl shadow-sm border border-blue-100">
+                    <div class="bg-blue-100 p-3 rounded-full text-blue-800">
+                        <i class="far fa-clock text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase font-bold">Waktu</p>
+                        <p class="text-lg font-bold text-gray-800">08:30 WIB - Selesai</p>
+                    </div>
+                </div>
+
+                <!-- Location -->
+                <div class="flex items-start space-x-4 bg-white p-4 rounded-xl shadow-sm border border-blue-100">
+                    <div class="bg-blue-100 p-3 rounded-full text-blue-800">
+                        <i class="fas fa-map-marker-alt text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-xs text-gray-500 uppercase font-bold">Lokasi</p>
+                        <p class="text-md font-semibold text-gray-800 mb-2">Fakultas Kesehatan Masyarakat, Universitas Airlangga</p>
+                        <a href="https://maps.app.goo.gl/FP1hjcV3SxvQSbaZA" target="_blank" class="inline-flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors">
+                            <i class="fas fa-external-link-alt mr-2"></i> Buka Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Countdown Section -->
+        <div class="px-6 py-8 text-center bg-gradient-to-br from-blue-900 to-blue-800 text-white">
+            <h4 class="text-sm uppercase tracking-widest font-semibold mb-6 text-blue-200">Menuju Acara</h4>
+            
+            <div class="grid grid-cols-4 gap-2 md:gap-4 max-w-sm mx-auto" id="countdown-container">
+                <!-- Days -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+                    <span id="days" class="block text-2xl md:text-3xl font-bold font-mono">00</span>
+                    <span class="text-xs text-blue-200 uppercase">Hari</span>
+                </div>
+                <!-- Hours -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+                    <span id="hours" class="block text-2xl md:text-3xl font-bold font-mono">00</span>
+                    <span class="text-xs text-blue-200 uppercase">Jam</span>
+                </div>
+                <!-- Minutes -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+                    <span id="minutes" class="block text-2xl md:text-3xl font-bold font-mono">00</span>
+                    <span class="text-xs text-blue-200 uppercase">Menit</span>
+                </div>
+                <!-- Seconds -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+                    <span id="seconds" class="block text-2xl md:text-3xl font-bold font-mono text-yellow-400">00</span>
+                    <span class="text-xs text-blue-200 uppercase">Detik</span>
+                </div>
+            </div>
+            
+            <div id="event-started" class="hidden mt-4">
+                <span class="bg-yellow-500 text-blue-900 px-4 py-2 rounded-full font-bold animate-pulse">
+                    Acara Sedang Berlangsung / Telah Selesai
+                </span>
+            </div>
+
+            <!-- Add to Calendar Button -->
+            <div class="mt-8">
+                <!-- Google Calendar Link: 2026-01-23 08:30 WIB is 01:30 UTC -->
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ujian+Terbuka+Promosi+Doktor+dr.+Supriyanto+Dharmoredjo&dates=20260123T013000Z/20260123T043000Z&details=Judul+Disertasi:+PENGEMBANGAN+MODEL+MANAJEMEN+RUMAH+SAKIT+BERBASIS+KONSEP+HOSPITAL+WITHOUT+WALLS+DALAM+PLATFORM+PUBLIC+SAFETY+CENTRE&location=https://maps.app.goo.gl/FP1hjcV3SxvQSbaZA" target="_blank" 
+                   class="inline-block bg-yellow-500 hover:bg-yellow-400 text-blue-900 font-bold py-3 px-8 rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl border-b-4 border-yellow-700">
+                    <i class="far fa-calendar-plus mr-2"></i> Simpan di Kalender
+                </a>
+            </div>
+        </div>
+
+        <!-- Eco Green Note -->
+        <div class="px-6 py-4 bg-green-50 text-center border-t border-b border-green-100">
+            <div class="flex items-center justify-center space-x-2 mb-2 text-green-700">
+                <i class="fas fa-leaf"></i>
+                <h5 class="font-bold uppercase text-sm tracking-wider">Catatan Eco Green</h5>
+            </div>
+            <p class="text-sm text-gray-700 leading-relaxed max-w-md mx-auto">
+                Dalam rangka mendukung program Eco Green, tanpa mengurangi rasa hormat, ucapan tidak disampaikan dalam bentuk bunga papan, melainkan dalam bentuk bibit pohon atau tanaman hidup. Terima kasih.
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="bg-gray-100 p-4 text-center">
+            <p class="text-xs text-gray-500">
+                &copy; 2026 Program Doktor Kesehatan Masyarakat<br>Universitas Airlangga
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Target: Jan 23, 2026 08:30:00 WIB (UTC+7)
+            const targetDateStr = "2026-01-23T08:30:00+07:00";
+            const countDownDate = new Date(targetDateStr).getTime();
+
+            function updateCountdown() {
+                // Get today's date and time
+                const now = new Date().getTime();
+                const distance = countDownDate - now;
+
+                // Elements
+                const elDays = document.getElementById("days");
+                const elHours = document.getElementById("hours");
+                const elMinutes = document.getElementById("minutes");
+                const elSeconds = document.getElementById("seconds");
+                const elContainer = document.getElementById("countdown-container");
+                const elStarted = document.getElementById("event-started");
+
+                if (!elDays || !elHours || !elMinutes || !elSeconds) return;
+
+                if (distance > 0) {
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    elDays.innerText = String(days).padStart(2, '0');
+                    elHours.innerText = String(hours).padStart(2, '0');
+                    elMinutes.innerText = String(minutes).padStart(2, '0');
+                    elSeconds.innerText = String(seconds).padStart(2, '0');
+                } else {
+                    if (typeof timerInterval !== 'undefined') clearInterval(timerInterval);
+                    if(elContainer) elContainer.style.display = "none";
+                    if(elStarted) elStarted.classList.remove("hidden");
+                }
+            }
+
+            updateCountdown();
+            const timerInterval = setInterval(updateCountdown, 1000);
+        });
+    </script>
+</body>
+</html>
